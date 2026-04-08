@@ -1,10 +1,39 @@
+import { Toaster } from "@/components/ui/sonner"
+import { Navigate, Route, Routes } from "react-router-dom"
+import CommonLayout from "./components/layout/CommonLayout"
+import DashboardPage from "./pages/DashboardPage"
+import LeavePage from "./pages/LeavePage"
+import PayslipsPage from "./pages/PayslipsPage"
+import SettingsPage from "./pages/SettingsPage"
+import EmployeesPage from "./pages/EmployeesPage"
+import PrintPayslipPage from "./pages/PrintPayslipPage"
+import LoginLandingPage from "./pages/LoginLandingPage"
 
 function App() {
 
   return (
-    <div className="">
-      Hello World
-    </div>
+    <>
+      <Toaster />
+
+      <Routes>
+        <Route path="/login" element={<LoginLandingPage />} />
+
+        <Route path="/login/admin" element={<LoginLandingPage role='admin' title='Admin Portal' subtitle='Sing in to manage the organization'/>} />
+        <Route path="/login/employee" element={<LoginLandingPage role='employee' title='Employee Portal' subtitle='Sing in to access your account'/>} />
+
+        <Route element={<CommonLayout />} >
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/employees" element={<EmployeesPage />} />
+          <Route path="/leave" element={<LeavePage />} />
+          <Route path="/payslips" element={<PayslipsPage />} />
+          <Route path="/settings" element={<SettingsPage />} />
+        </Route>
+
+        <Route path="/print/payslips/:id" element={<PrintPayslipPage />} />
+
+        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+      </Routes>
+    </>
   )
 }
 
