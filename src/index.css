@@ -57,7 +57,7 @@
 
 :root {
 
-  --primary: oklch(0.28 0.06 250); 
+  --primary: oklch(0.28 0.06 250);
   --primary-foreground: oklch(0.985 0 0);
 
 
@@ -140,5 +140,23 @@
 
   html {
     @apply font-sans;
+  }
+}
+
+.btn-primary {
+  @apply bg-brand-secondary text-gray-200 px-5 py-2.5 rounded-md text-sm font-semibold hover:bg-brand-primary disabled:opacity-50 transition-all duration-200 shadow-lg shadow-brand-primary/40 active:scale-[0.98]
+}
+
+.btn-secondary{
+  @apply bg-gray-100 text-gray-700 border border-gray-300 px-5 py-2.5 rounded-md text-sm hover:bg-gray-50 hover:border-gray-400 transition-all duration-200
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
   }
 }

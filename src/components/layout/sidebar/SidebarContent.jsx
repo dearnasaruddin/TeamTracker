@@ -1,13 +1,5 @@
 import logo from '@/assets/images/teamtracker_white.svg'
-import { FileTextIcon } from 'lucide-react';
-import { SettingsIcon } from 'lucide-react';
-import { XIcon } from 'lucide-react';
-import { LogOutIcon } from 'lucide-react';
-import { ChevronRightIcon } from 'lucide-react';
-import { DollarSignIcon } from 'lucide-react';
-import { CalendarIcon } from 'lucide-react';
-import { UserIcon } from 'lucide-react';
-import { LayoutGridIcon } from 'lucide-react';
+import { FileTextIcon, SettingsIcon, XIcon, LogOutIcon, ChevronRightIcon, DollarSignIcon, CalendarIcon, UserIcon, LayoutGridIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const SidebarContent = ({ pathname, username, setMobileOpen }) => {

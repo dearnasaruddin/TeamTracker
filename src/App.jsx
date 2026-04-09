@@ -9,6 +9,7 @@ import EmployeesPage from "./pages/EmployeesPage"
 import PrintPayslipPage from "./pages/PrintPayslipPage"
 import LoginLandingPage from "./pages/LoginLandingPage"
 import LoginForm from "./components/login/LoginForm"
+import AttendancePage from "./pages/AttendancePage"
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
         <Route element={<CommonLayout />} >
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/employees" element={<EmployeesPage />} />
+          <Route path="/attendance" element={<AttendancePage />} />
           <Route path="/leave" element={<LeavePage />} />
           <Route path="/payslips" element={<PayslipsPage />} />
           <Route path="/settings" element={<SettingsPage />} />
