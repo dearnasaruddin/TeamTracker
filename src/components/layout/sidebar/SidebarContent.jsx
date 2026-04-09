@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const SidebarContent = ({ pathname, username, setMobileOpen }) => {
 
     // ========= Nav items data ========
-    const role = "" || "EMPLOYEE";
+    const role = "ADMIN" || "EMPLOYEE";
 
     const navItems = [
         { name: "Dashboard", href: "/dashboard", icon: LayoutGridIcon },

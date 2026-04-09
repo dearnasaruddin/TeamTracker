@@ -76,7 +76,6 @@ const LoginForm = ({ role, title, subtitle }) => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="border border-gray-300 focus:outline-brand-accent rounded-sm p-2.5 w-full"
                 placeholder="john@example.com" />
             </div>
 
@@ -91,7 +90,7 @@ const LoginForm = ({ role, title, subtitle }) => {
                   value={formData.password}
                   onChange={handleChange}
                   required
-                  className="border border-gray-300 focus:outline-brand-accent rounded-sm p-2.5 w-full placeholder:translate-y-1 pr-11" placeholder="********" />
+                  className="placeholder:translate-y-1 pr-11" placeholder="********" />
 
                 <button
                   type="button"

@@ -31,8 +31,8 @@ const EmployeeDashboard = ({ data }) => {
     return (
         <div className="animate-fade-in">
             <div className="mb-8">
-                <h1 className="text-2xl font-medium text-gray-900 tracking-tight">Welcome, {emp?.firstName}!</h1>
-                <p className="text-gray-500 text-sm mt-1">
+                <h1 className="page-title">Welcome, {emp?.firstName}!</h1>
+                <p className="page-subtitle">
                     {emp?.position} - {emp?.department || 'No Department'}
                 </p>
             </div>
@@ -40,7 +40,7 @@ const EmployeeDashboard = ({ data }) => {
             {/* ============ Cards ============ */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 mb-8">
                 {cards.map((card, index) => (
-                    <div key={index} className="bg-white/90 rounded-lg border border-gray-300 hover:-translate-y-0.5 transition-all duration-300 p-5 sm:p-6 relative overflow-hidden group flex items-center justify-between">
+                    <div key={index} className="card card-hover p-5 sm:p-6 relative overflow-hidden group flex items-center justify-between">
                         <div>
                             <div className="absolute left-0 top-0 bottom-0 w-1 rounded-r-full bg-brand-secondary group-hover:bg-brand-accent/80" />
                             <p className="text-sm font-medium text-gray-700">{card.title}</p>
