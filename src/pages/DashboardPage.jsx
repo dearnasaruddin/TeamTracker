@@ -11,10 +11,10 @@ const DashboardPage = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    setData(dummyAdminDashboardData)
+    setData(dummyEmployeeDashboardData)
     setTimeout(()=>{
       setLoading(false)
-    },300)
+    },200)
   }, [])
 
   if (loading) return <Loading />

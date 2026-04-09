@@ -1,0 +1,32 @@
+import { ClockIcon, AlertCircleIcon, CalendarIcon } from "lucide-react"
+
+const AttendanceStats = ({ history }) => {
+
+    const totalPresent = history.filter((h) => h.status === 'PRESENT' | h.status === 'LATE').length
+    const totalLate = history.filter((h) => h.status === 'LATE').length
+
+    const stats = [
+        { label: 'Days Present', value: totalPresent, icon: CalendarIcon },
+        { label: 'Late Arrivals', value: totalLate, icon: AlertCircleIcon },
+        { label: 'Avg. Work Hrs', value: '8.5 Hrs', icon: ClockIcon },
+    ]
+
+    return (
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 mb-8">
+            {stats.map((s) => (
+                <div key={s.label} className="card card-hover p-5 sm:p-6 flex items-center gap-4 relative overflow-hidden group">
+                    <div className="absolute left-0 top-0 bottom-0 w-1 rounded-r-full bg-brand-secondary group-hover:bg-brand-accent/80"/>
+                    <div className="p-3 rounded-lg bg-gray-100 text-gray-600 group-hover:bg-brand-accent/10 group-hover:text-brand-accent transition-colors duration-200">
+                        <s.icon className="size-5"/>
+                    </div>
+                    <div>
+                        <p className="text-sm text-gray-500">{s.label}</p>
+                        <p className="text-2xl font-medium text-gray-900 tracking-tight">{s.value}</p>
+                    </div>
+                </div>
+            ))}
+        </div>
+    )
+}
+
+export default AttendanceStats

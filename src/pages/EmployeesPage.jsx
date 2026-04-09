@@ -22,12 +22,12 @@ const EmployeesPage = () => {
     setEmployees(dummyEmployeeData.filter((emp) => query.department ? emp.department === query.department : emp))
     setTimeout(() => {
       setLoading(false)
-    }, 300);
-  }, [])
+    }, 200);
+  }, [query.department])
 
   useEffect(() => {
     fetchEmployees()
-  }, [])
+  }, [fetchEmployees])
 
   const filtered = employees.filter((emp) => `${emp.firstName} ${emp.lastName} ${emp.position}`.toLocaleLowerCase().includes(query.search.toLocaleLowerCase()))
 
