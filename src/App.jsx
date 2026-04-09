@@ -8,6 +8,7 @@ import SettingsPage from "./pages/SettingsPage"
 import EmployeesPage from "./pages/EmployeesPage"
 import PrintPayslipPage from "./pages/PrintPayslipPage"
 import LoginLandingPage from "./pages/LoginLandingPage"
+import LoginForm from "./components/login/LoginForm"
 
 function App() {
 
@@ -18,8 +19,8 @@ function App() {
       <Routes>
         <Route path="/login" element={<LoginLandingPage />} />
 
-        <Route path="/login/admin" element={<LoginLandingPage role='admin' title='Admin Portal' subtitle='Sing in to manage the organization'/>} />
-        <Route path="/login/employee" element={<LoginLandingPage role='employee' title='Employee Portal' subtitle='Sing in to access your account'/>} />
+        <Route path="/login/admin" element={<LoginForm role='admin' title='Admin Portal' subtitle='Sing in to manage the organization'/>} />
+        <Route path="/login/employee" element={<LoginForm role='employee' title='Employee Portal' subtitle='Sing in to access your account'/>} />
 
         <Route element={<CommonLayout />} >
           <Route path="/dashboard" element={<DashboardPage />} />
