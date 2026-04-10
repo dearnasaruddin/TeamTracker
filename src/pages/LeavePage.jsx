@@ -1,7 +1,74 @@
+import { dummyLeaveData } from "@/assets/dummyData/dummyData"
+import LeaveApplyModal from "@/components/leave/LeaveApplyModal"
+import LeaveHistory from "@/components/leave/LeaveHistory"
+import Loading from "@/components/shared/Loading"
+import { ThermometerIcon, UmbrellaIcon, PalmtreeIcon, PlusIcon } from "lucide-react"
+import { useEffect, useState, useCallback } from "react"
 
 const LeavePage = () => {
+
+  const [leaves, setLeaves] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [showModal, setShowModal] = useState(false)
+  const [isDeleted, setIsDeleted] = useState(false)
+  const isAdmin = false
+
+  const fetchLeaves = useCallback(() => {
+    setLeaves(dummyLeaveData)
+    setTimeout(() => {
+      setLoading(false)
+    }, 200);
+  }, [])
+
+  useEffect(() => {
+    fetchLeaves()
+  }, [fetchLeaves])
+
+  if (loading) return <Loading />
+
+  const approvedLeaves = leaves.filter((l) => l.status === 'APPROVED')
+  const sickCount = approvedLeaves.filter((l) => l.type === 'SICK').length
+  const casualCount = approvedLeaves.filter((l) => l.type === 'CASUAL').length
+  const annualCount = approvedLeaves.filter((l) => l.type === 'ANNUAL').length
+
+  const leaveStats = [
+    { label: 'Sick Leave', value: sickCount, icon: ThermometerIcon },
+    { label: 'Casual Leave', value: casualCount, icon: UmbrellaIcon },
+    { label: 'Annual Leave', value: annualCount, icon: PalmtreeIcon }
+  ]
+
   return (
-    <div>LeavePage</div>
+    <div className="animate-fade-in">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+        <div>
+          <h1 className="page-title">Leave Management</h1>
+          <p className="page-subtitle">{isAdmin ? 'Manage leave applications' : 'Your leave history and requests'}</p>
+        </div>
+        {!isAdmin && !isDeleted && (
+          <button onClick={() => setShowModal(true)} className="btn-primary flex items-center gap-2 w-full sm:w-auto justify-center">
+            <PlusIcon className="size-4" /> Apply for Leave
+          </button>
+        )}
+      </div>
+      {!isAdmin &&
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 mb-8">
+          {leaveStats.map((s) => (
+            <div key={s.label} className="card card-hover p-5 sm:p-6 flex items-center gap-4 relative overflow-hidden group">
+              <div className="absolute left-0 top-0 bottom-0 w-1 rounded-r-full bg-brand-secondary group-hover:bg-brand-accent/80" />
+              <div className="p-3 rounded-lg bg-gray-100 text-gray-600 group-hover:bg-brand-accent/10 group-hover:text-brand-accent transition-colors duration-200">
+                <s.icon className="size-5" />
+              </div>
+              <div>
+                <p className="text-sm text-gray-500">{s.label}</p>
+                <p className="text-2xl font-bold text-gray-900 tracking-tight">{s.value} <span className="text-sm font-normal text-gray-400">taken</span></p>
+              </div>
+            </div>
+          ))}
+        </div>
+      }
+      <LeaveHistory leaves={leaves} isAdmin={isAdmin} onUpdate={fetchLeaves} />
+      <LeaveApplyModal open={showModal} onClose={()=>setShowModal(false)} onSuccess={fetchLeaves}/>
+    </div>
   )
 }
 
