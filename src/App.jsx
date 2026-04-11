@@ -32,7 +32,7 @@ function App() {
           <Route path="/settings" element={<SettingsPage />} />
         </Route>
 
-        <Route path="/print/payslips/:id" element={<PrintPayslipPage />} />
+        <Route path="/print/payslip/:id" element={<PrintPayslipPage />} />
 
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>

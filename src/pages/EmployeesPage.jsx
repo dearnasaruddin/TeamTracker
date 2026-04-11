@@ -1,6 +1,6 @@
 import { dummyEmployeeData, DEPARTMENTS } from "@/assets/dummyData/dummyData"
-import EmployeeCard from "@/components/shared/EmployeeCard"
-import EmployeeForm from "@/components/shared/EmployeeForm"
+import EmployeeCard from "@/components/employee/EmployeeCard"
+import EmployeeForm from "@/components/employee/EmployeeForm"
 import { Search, Plus, X } from "lucide-react"
 import { useEffect } from "react"
 import { useCallback } from "react"
