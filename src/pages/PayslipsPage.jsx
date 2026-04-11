@@ -2,9 +2,7 @@ import { dummyEmployeeData, dummyPayslipData } from "@/assets/dummyData/dummyDat
 import PayslipGenerateForm from "@/components/payslip/PayslipGenerateForm"
 import PayslipList from "@/components/payslip/PayslipList"
 import Loading from "@/components/shared/Loading"
-import { useEffect } from "react"
-import { useCallback } from "react"
-import { useState } from "react"
+import { useState, useEffect, useCallback } from "react"
 
 const PayslipsPage = () => {
 

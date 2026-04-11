@@ -40,7 +40,7 @@ const SettingsPage = () => {
           </div>
           <div>
             <h6 className="font-medium text-gray-900">Password</h6>
-            <p className="text-sm text-gray-50">Update your account password</p>
+            <p className="text-sm text-gray-500">Update your account password</p>
           </div>
         </div>
         <button onClick={() => setShowPasswordModal(true)} className="btn-secondary text-sm">
