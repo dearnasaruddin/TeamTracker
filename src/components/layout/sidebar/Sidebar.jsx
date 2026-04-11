@@ -29,7 +29,9 @@ const Sidebar = () => {
             </button>
 
             {/* ============ Mobile overlay ============ */}
-            <div onClick={handleMobileSidebar} className="lg:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-40"></div>
+            {mobileOpen && 
+            <div onClick={handleMobileSidebar} className="lg:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-40"/>
+            }
 
             {/* ============ Sidebar Desktop ============ */}
             <aside className="hidden lg:flex flex-col h-full w-68 bg-linear-to-b from-brand-primary via-brand-primary to-brand-secondary text-gray-200 shrink-0 border-r border-gray-300">
