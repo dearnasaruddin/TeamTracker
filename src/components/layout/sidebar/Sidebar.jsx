@@ -39,7 +39,7 @@ const Sidebar = () => {
             </aside>
 
             {/* ============ Sidebar Mobile ============ */}
-            <aside className={`lg:hidden fixed inset-y-0 left-0 w-72 bg-linear-to-b from-brand-primary via-brand-primary to-brand-secondary text-gray-200 z-50 flex flex-col transform transition-transform duration-300 ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+            <aside className={`lg:hidden fixed inset-y-0 left-0 w-74 bg-linear-to-b from-brand-primary via-brand-primary to-brand-secondary text-gray-200 z-50 flex flex-col transform transition-transform duration-300 ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}`}>
                 <SidebarContent pathname={pathname} username={username} setMobileOpen={setMobileOpen}/>
             </aside>
         </>
