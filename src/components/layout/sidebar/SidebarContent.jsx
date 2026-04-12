@@ -26,10 +26,10 @@ const SidebarContent = ({ pathname, username, setMobileOpen }) => {
             {/* ========= Brand header ========= */}
             <div className="px-5 pt-6 pb-5 border-b border-gray-600">
                 <div className="flex items-center justify-between">
-                    <div className='flex items-center gap-3'>
+                    <div className='flex items-center gap-2'>
                         {/* Logo */}
                         <div>
-                            <img className='w-12' src={logo} alt="logo" />
+                            <img className='w-13.5' src={logo} alt="logo" />
                         </div>
                         {/* Project info */}
                         <div>
