@@ -40,7 +40,7 @@ const LeaveHistory = ({ leaves, isAdmin, onUpdate }) => {
                                             <span className="badge bg-gray-200 text-gray-600">{leave.type}</span>
                                         </td>
 
-                                        <td className="px-6 py-4 text-gray-600">{format(new Date(leave.startDate), "MMM dd")} - {format(new Date(leave.endDate), "MMM dd, yyyy")} </td>
+                                        <td className="px-6 py-4 text-gray-600"><span className="whitespace-nowrap">{format(new Date(leave.startDate), "MMM dd")}</span> - <span className="whitespace-nowrap">{format(new Date(leave.endDate), "MMM dd, yyyy")}</span> </td>
 
                                         <td className="max-w-xs truncate text-gray-500" title={leave.reason}>
                                             {leave.reason}

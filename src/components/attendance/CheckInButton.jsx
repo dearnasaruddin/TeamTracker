@@ -25,8 +25,8 @@ const CheckInButton = ({ todayRecord, onAction }) => {
     const isCheckedIn = !!todayRecord?.isCheckedIn
 
     return (
-        <div className="absolute bottom-4 right-4 flex flex-col z-10">
-            <button onClick={handleAttendance} disabled={loading} className={`w-full max-w-xs flex justify-between items-center gap-8 p-4 rounded-xl text-gray-200 bg-linear-to-br ${isCheckedIn ? 'from-gray-700 to-gray-900' : 'from-brand-accent/70 to-brand-secondary'}`}>
+        <div className="absolute max-md:top-4 md:bottom-4 right-4 flex flex-col z-10">
+            <button onClick={handleAttendance} disabled={loading} className={`w-full max-w-xs flex justify-between items-center gap-2 md:gap-8 p-2 md:p-4 rounded-xl text-gray-200 bg-linear-to-br ${isCheckedIn ? 'from-gray-700 to-gray-900' : 'from-brand-accent/70 to-brand-secondary'}`}>
                 {loading ? <Loader2Icon className="size-7 animate-spin" /> : isCheckedIn ? <LogOutIcon className="size-7" /> : <LogInIcon className="size-7" />}
                 <div className="relative flex flex-col items-center text-center">
                     <h2 className="text-lg font-medium mb-1">{loading ? 'Processing...' : isCheckedIn ? 'Clock Out' : 'Clock In'}</h2>
