@@ -24,7 +24,7 @@ const SidebarContent = ({ pathname, username, setMobileOpen }) => {
     return (
         <>
             {/* ========= Brand header ========= */}
-            <div className="px-4 lg:px-5 pt-6 pb-5 border-b border-gray-600">
+            <Link to='/' className="px-4 lg:px-5 pt-6 pb-5 border-b border-gray-600">
                 <div className="flex items-center justify-between">
                     <div className='flex items-center gap-2'>
                         {/* Logo */}
@@ -43,7 +43,7 @@ const SidebarContent = ({ pathname, username, setMobileOpen }) => {
                         <XIcon size={20} />
                     </button>
                 </div>
-            </div>
+            </Link>
 
             {/* ========= User Profile Card ========= */}
             {username &&
