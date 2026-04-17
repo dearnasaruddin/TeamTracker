@@ -22,7 +22,7 @@ const PayslipList = ({ payslips, isAdmin }) => {
                                     <tr key={payslip._id || payslip.id}>
                                         {isAdmin &&
                                             <td className="text-gray-900">
-                                                {payslip.employee?.firstName}
+                                               <span className="mr-1">{payslip.employee?.firstName}</span>
                                                 {payslip.employee?.lastName}
                                             </td>
                                         }

@@ -41,7 +41,7 @@ const LeaveHistory = ({ leaves, isAdmin, onUpdate }) => {
                                     <tr key={leave._id || leave.id}>
                                         {isAdmin &&
                                             <td className="text-gray-900">
-                                                {leave.employee?.firstName}
+                                                <span className='mr-1'>{leave.employee?.firstName}</span>
                                                 {leave.employee?.lastName}
                                             </td>
                                         }
