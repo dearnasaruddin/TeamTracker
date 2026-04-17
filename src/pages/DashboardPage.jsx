@@ -1,9 +1,10 @@
-import { dummyAdminDashboardData, dummyEmployeeDashboardData } from "@/assets/dummyData/dummyData"
+import api from "@/api/axios"
 import AdminDashboard from "@/components/dashboard/AdminDashboard"
 import EmployeeDashboard from "@/components/dashboard/EmployeeDashboard"
 import Loading from "@/components/shared/Loading"
 import { useEffect } from "react"
 import { useState } from "react"
+import { toast } from "sonner"
 
 const DashboardPage = () => {
 
@@ -11,17 +12,18 @@ const DashboardPage = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    setData(dummyEmployeeDashboardData)
-    setTimeout(()=>{
-      setLoading(false)
-    },200)
+    api.get('/dashboard').then((res) => {
+      setData(res.data)
+    })
+      .catch(err => toast.error(err.response?.data?.error || err?.message))
+      .finally(() => setLoading(false))
   }, [])
 
   if (loading) return <Loading />
   if (!data) return <p className='text-center text-gray-500 py-12'>Failed to load dashboard</p>
 
   if (data.role === 'ADMIN') {
-    return <AdminDashboard data={data}/>
+    return <AdminDashboard data={data} />
   } else {
     return <EmployeeDashboard data={data} />
   }

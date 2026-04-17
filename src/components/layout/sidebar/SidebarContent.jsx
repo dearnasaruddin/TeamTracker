@@ -1,11 +1,14 @@
 import logo from '@/assets/images/teamtracker_white.svg'
-import { FileTextIcon, SettingsIcon, XIcon, LogOutIcon, ChevronRightIcon, DollarSignIcon, CalendarIcon, UserIcon, LayoutGridIcon } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
+import { FileTextIcon, SettingsIcon, XIcon, LogOutIcon, ChevronRightIcon, DollarSignIcon, CalendarIcon, UserIcon, LayoutGridIcon, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const SidebarContent = ({ pathname, username, setMobileOpen }) => {
 
+    const { user, loading, logout } = useAuth()
+
     // ========= Nav items data ========
-    const role = "" || "EMPLOYEE";
+    const role = user?.role;
 
     const navItems = [
         { name: "Dashboard", href: "/dashboard", icon: LayoutGridIcon },
@@ -18,7 +21,8 @@ const SidebarContent = ({ pathname, username, setMobileOpen }) => {
     ];
 
     const handleLogout = () => {
-        window.location.href = '/login'
+        logout()
+        // window.location.href = '/login'
     }
 
     return (
@@ -58,7 +62,7 @@ const SidebarContent = ({ pathname, username, setMobileOpen }) => {
                         {/* Name & designation */}
                         <div className='min-w-0'>
                             <p className='text-sm font-medium text-gray-200 truncate'>{username}</p>
-                            <p className='text-xs text-gray-400 truncate'>{role === 'Admin' ? 'Administrator' : 'Employee'}</p>
+                            <p className='text-xs text-gray-400 truncate'>{role === 'ADMIN' ? 'Administrator' : 'Employee'}</p>
                         </div>
                     </div>
                 </div>
@@ -71,23 +75,32 @@ const SidebarContent = ({ pathname, username, setMobileOpen }) => {
 
             {/* ========= Navigation List ========= */}
             <div className="flex-1 px-3 space-y-0.5 overflow-y-auto">
-                {navItems.map((item) => {
-                    const isActive = pathname.startsWith(item.href)
-                    return (
-                        <Link key={item.name} to={item.href} className={`group flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium transition-all duration-150 relative ${isActive ? 'bg-brand-accent/20 text-brand-accent' : 'text-gray-300 hover:text-gray-100 hover:bg-gray-700/30'}`}>
+                {loading ? (
+                    <div className='p-3 flex items-center gap-2 text-gray-500'>
+                        <Loader2 className='size-4 animate-spin' />
+                        <span className='text-sm'>Loading...</span>
+                    </div>
+                ) : (
+                    navItems.map((item) => {
+                        const isActive = pathname.startsWith(item.href)
+                        return (
+                            <Link key={item.name} to={item.href} className={`group flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium transition-all duration-150 relative ${isActive ? 'bg-brand-accent/20 text-brand-accent' : 'text-gray-300 hover:text-gray-100 hover:bg-gray-700/30'}`}>
 
-                            {/* active mark */}
-                            {isActive && <div className='absolute left-0 top-1/2 -translate-y-1/2 w-1 h-5 rounded-r-full bg-brand-accent' />}
+                                {/* active mark */}
+                                {isActive && <div className='absolute left-0 top-1/2 -translate-y-1/2 w-1 h-5 rounded-r-full bg-brand-accent' />}
 
-                            {/* icon */}
-                            <item.icon className={`size-4 shrink-0 ${isActive ? 'text-brand-accent' : 'text-gray-300 group-hover:text-gray-200'}`} />
+                                {/* icon */}
+                                <item.icon className={`size-4 shrink-0 ${isActive ? 'text-brand-accent' : 'text-gray-300 group-hover:text-gray-200'}`} />
 
-                            {/* name */}
-                            <span className='flex-1'>{item.name}</span>
-                            {isActive && <ChevronRightIcon className='size-3.5 text-brand-accent/50' />}
-                        </Link>
-                    )
-                })}
+                                {/* name */}
+                                <span className='flex-1'>{item.name}</span>
+                                {isActive && <ChevronRightIcon className='size-3.5 text-brand-accent/50' />}
+                            </Link>
+                        )
+                    })
+                )}
+
+
             </div>
 
             {/* ========= Logout btn ========= */}

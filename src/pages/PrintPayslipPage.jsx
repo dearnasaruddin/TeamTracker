@@ -1,3 +1,4 @@
+import api from "@/api/axios"
 import { dummyPayslipData } from "@/assets/dummyData/dummyData"
 import Loading from "@/components/shared/Loading"
 import { format } from "date-fns"
@@ -11,10 +12,7 @@ const PrintPayslipPage = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    setPayslip(dummyPayslipData.find((slip) => slip._id == id))
-    setTimeout(() => {
-      setLoading(false)
-    }, 200);
+   api.get(`/payslips/${id}`).then((res)=>setPayslip(res.data)).catch(console.error).finally(()=>setLoading(false))
   }, [id])
 
   if (loading) return <Loading />

@@ -1,3 +1,4 @@
+import api from "@/api/axios"
 import { dummyEmployeeData, DEPARTMENTS } from "@/assets/dummyData/dummyData"
 import EmployeeCard from "@/components/employee/EmployeeCard"
 import EmployeeForm from "@/components/employee/EmployeeForm"
@@ -18,11 +19,15 @@ const EmployeesPage = () => {
   })
 
   const fetchEmployees = useCallback(async () => {
-    setLoading(true)
-    setEmployees(dummyEmployeeData.filter((emp) => query.department ? emp.department === query.department : emp))
-    setTimeout(() => {
+    try {
+      const url = query.department ? `/employee?department=${query.department}` : '/employee'
+      const res = await api.get(url)
+      setEmployees(res.data)
+    } catch (error) {
+      console.log('Failed to fetch employees')
+    }finally{
       setLoading(false)
-    }, 200);
+    }
   }, [query.department])
 
   useEffect(() => {
@@ -44,7 +49,7 @@ const EmployeesPage = () => {
     fetchEmployees()
   }
 
-  const handleCreateSuccess = ()=>{
+  const handleCreateSuccess = () => {
     setShowCreateModal(false)
     fetchEmployees()
   }
@@ -103,7 +108,7 @@ const EmployeesPage = () => {
       {showCreateModal &&
         <div className="fixed bg-black/40 backdrop-blur-sm inset-0 z-50 flex items-start justify-center p-4 overflow-y-auto" onClick={() => setShowCreateModal(false)}>
           <div className="fixed inset-0" />
-         <div className="relative bg-gray-50 rounded-2xl shadow-2xl w-full max-w-3xl my-8 animate-fade-in" onClick={(e) => e.stopPropagation()}>
+          <div className="relative bg-gray-50 rounded-2xl shadow-2xl w-full max-w-3xl my-8 animate-fade-in" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between p-6 pb-0">
               <div>
                 <h2 className="text-lg font-semibold text-gray-900">Add New Employee</h2>

@@ -1,10 +1,17 @@
 import LoginLeftSide from "@/components/login/LoginLeftSide"
+import Loading from "@/components/shared/Loading"
+import { useAuth } from "@/context/AuthContext"
 import { ArrowRightIcon } from "lucide-react"
 import { UserIcon } from "lucide-react"
 import { ShieldIcon } from "lucide-react"
-import { Link } from "react-router-dom"
+import { Link, Navigate } from "react-router-dom"
 
 const LoginLandingPage = () => {
+
+   const {user, loading} = useAuth()
+
+    if(loading) return <Loading/>
+    if(user) return <Navigate to={'/'}/>
 
   const portalOptions = [
     {
@@ -37,7 +44,7 @@ const LoginLandingPage = () => {
           {/* =========== Portals List =========== */}
           <div className="space-y-4">
             {portalOptions.map((portal) => (
-              <Link key={portal.to} to={portal.to} className="group block border bg-gray-100 hover:bg-brand-accent/10 hover:border-brand-accent rounded-lg p-5 sm:p-6 transition-all duration-300">
+              <Link key={portal.to} to={portal.to} className="group block border bg-gray-100 hover:bg-brand-accent/10 hover:border-brand-accent rounded-lg p-5 sm:p-6 transition-all duration-300 select-none">
                 <div className="flex items-center justify-between gap-4 sm:gap-5">
                   <h3 className="text-lg mb-1">{portal.title}</h3>
                   <ArrowRightIcon className="size-4 group-hover:translate-x-1 transition-all"/>

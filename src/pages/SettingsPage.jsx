@@ -1,9 +1,10 @@
-import { dummyProfileData } from "@/assets/dummyData/dummyData"
+import api from "@/api/axios"
 import ChangePasswordModal from "@/components/settings/ChangePasswordModal"
 import ProfileForm from "@/components/settings/ProfileForm"
 import Loading from "@/components/shared/Loading"
 import { Lock } from "lucide-react"
 import { useState, useEffect } from "react"
+import { toast } from "sonner"
 
 const SettingsPage = () => {
 
@@ -12,10 +13,15 @@ const SettingsPage = () => {
   const [showPasswordModal, setShowPasswordModal] = useState(false)
 
   const fetchProfile = async () => {
-    setProfile(dummyProfileData)
-    setTimeout(() => {
+    try {
+      const res = await api.get('/profile')
+      const profile = res.data
+      if(profile) setProfile(profile)
+    } catch (err) {
+      toast.error(err?.response?.data?.error || err?.message)
+    }finally{
       setLoading(false)
-    }, 200);
+    }
   }
 
   useEffect(() => {
@@ -47,7 +53,7 @@ const SettingsPage = () => {
           Change
         </button>
       </div>
-      <ChangePasswordModal open={showPasswordModal} onClose={()=>setShowPasswordModal(false)}/>
+      <ChangePasswordModal open={showPasswordModal} onClose={() => setShowPasswordModal(false)} />
     </div>
   )
 }

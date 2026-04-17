@@ -1,4 +1,4 @@
-import { dummyAttendanceData } from "@/assets/dummyData/dummyData"
+import api from "@/api/axios"
 import AttendanceHistory from "@/components/attendance/AttendanceHistory"
 import AttendanceStats from "@/components/attendance/AttendanceStats"
 import CheckInButton from "@/components/attendance/CheckInButton"
@@ -6,6 +6,7 @@ import Loading from "@/components/shared/Loading"
 import { useEffect } from "react"
 import { useCallback } from "react"
 import { useState } from "react"
+import { toast } from "sonner"
 
 const AttendancePage = () => {
 
@@ -14,10 +15,16 @@ const AttendancePage = () => {
   const [isDeleted, setIsDeleted] = useState(false)
 
   const fetchData = useCallback(async () => {
-    setHistory(dummyAttendanceData)
-    setTimeout(() => {
+    try {
+      const res = await api.get('/attendance')
+      const json = res.data
+      setHistory(json.data || [])
+      if (json.employee?.isDeleted) setIsDeleted(true)
+    } catch (err) {
+      toast.error(err?.response?.data?.error || err?.message)
+    } finally {
       setLoading(false)
-    }, 200);
+    }
   }, [])
 
   useEffect(() => {
@@ -44,12 +51,12 @@ const AttendancePage = () => {
         </div>
       ) : (
         <div className="mb-8">
-          <CheckInButton todayRecord={todayRecord} onAction={fetchData}/>
+          <CheckInButton todayRecord={todayRecord} onAction={fetchData} />
         </div>
       )}
 
-      <AttendanceStats history={history}/>
-      <AttendanceHistory history={history}/>
+      <AttendanceStats history={history} />
+      <AttendanceHistory history={history} />
     </div>
   )
 }

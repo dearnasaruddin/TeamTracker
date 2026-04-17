@@ -1,7 +1,6 @@
 import { UsersIcon, Building2Icon, CalendarIcon, FileTextIcon } from "lucide-react"
 
 const AdminDashboard = ({data}) => {
-
     const stats = [
         {
             icon: UsersIcon,
@@ -17,7 +16,7 @@ const AdminDashboard = ({data}) => {
         },
         {
             icon: CalendarIcon,
-            value: data.todayAttendance,
+            value: data.totalAttendance,
             label: "Today's Attendance",
             description: 'Checked in today'
         },

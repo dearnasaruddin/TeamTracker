@@ -1,3 +1,4 @@
+import api from "@/api/axios"
 import { Loader2, Save, User } from "lucide-react"
 import { useState } from "react"
 
@@ -9,6 +10,20 @@ const ProfileForm = ({ initialData, onSuccess }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        setLoading(true)
+        setError('')
+        setMessage('')
+        const formData = new FormData(e.currentTarget)
+        try {
+            await api.post('/profile', formData)
+            setMessage('Profile updated successfully')
+            onSuccess?.()
+        } catch (err) {
+            setError(err?.response?.data?.error || err?.message)
+        } finally {
+            setLoading(false)
+        }
+
     }
 
     return (
@@ -62,7 +77,7 @@ const ProfileForm = ({ initialData, onSuccess }) => {
                 ) : (
                     <div className="flex justify-end pt-2">
                         <button type="submit" disabled={loading} className="btn-primary flex items-center gap-2 justify-center w-full sm:w-auto">
-                            {loading ? <Loader2 className="size-4 animate-spin"/> : <Save className="size-4"/>}
+                            {loading ? <Loader2 className="size-4 animate-spin" /> : <Save className="size-4" />}
                             Save Changes
                         </button>
                     </div>

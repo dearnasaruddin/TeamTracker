@@ -15,7 +15,7 @@ function App() {
 
   return (
     <>
-      <Toaster />
+      <Toaster position="top-center" richColors />
 
       <Routes>
         <Route path="/login" element={<LoginLandingPage />} />
