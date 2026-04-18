@@ -15,12 +15,12 @@ const EmployeesPage = () => {
   const [showCreateModal, setShowCreateModal] = useState(false)
   const [query, setQuery] = useState({
     search: '',
-    department: ''
+    department: 'all'
   })
 
   const fetchEmployees = useCallback(async () => {
     try {
-      const url = query.department ? `/employee?department=${query.department}` : '/employee'
+      const url = query.department !== 'all' ? `/employee?department=${query.department}` : '/employee'
       const res = await api.get(url)
       setEmployees(res.data)
     } catch (error) {
@@ -77,7 +77,7 @@ const EmployeesPage = () => {
           </div>
 
           <select name="department" value={query.department} onChange={handleInput} className="max-w-40">
-            <option>All Departments</option>
+            <option value='all'>All Departments</option>
             {DEPARTMENTS.map((deptName) => (
               <option key={deptName} value={deptName}>{deptName}</option>
             ))}
