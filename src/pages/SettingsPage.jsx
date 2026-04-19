@@ -12,14 +12,15 @@ const SettingsPage = () => {
   const [loading, setLoading] = useState(true)
   const [showPasswordModal, setShowPasswordModal] = useState(false)
 
+  // ========== Fetch user profile ==========
   const fetchProfile = async () => {
     try {
       const res = await api.get('/profile')
       const profile = res.data
-      if(profile) setProfile(profile)
+      if (profile) setProfile(profile)
     } catch (err) {
       toast.error(err?.response?.data?.error || err?.message)
-    }finally{
+    } finally {
       setLoading(false)
     }
   }
@@ -32,12 +33,16 @@ const SettingsPage = () => {
 
   return (
     <div className="animate-fade-in">
+
+      {/* ========= Page Header ========= */}
       <div className="page-header">
         <h1 className="page-title">Settings</h1>
         <p className="page-subtitle">Manage your account and preferences</p>
       </div>
 
+      {/* ========= Profile Form ========= */}
       {profile && <ProfileForm initialData={profile} onSuccess={fetchProfile} />}
+
       {/* ========== Change Password trigger ========== */}
       <div className="card max-w-md p-6 flex items-center justify-between">
         <div className="flex items-center gap-3">
@@ -53,6 +58,8 @@ const SettingsPage = () => {
           Change
         </button>
       </div>
+
+      {/* ========= Change Password Modal ========= */}
       <ChangePasswordModal open={showPasswordModal} onClose={() => setShowPasswordModal(false)} />
     </div>
   )

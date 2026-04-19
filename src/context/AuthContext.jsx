@@ -10,6 +10,7 @@ export function AuthProvider({ children }) {
     const [token, setToken] = useState(localStorage.getItem('token'))
     const [loading, setLoading] = useState(true)
 
+    // ===== Refresh session on app load =====
     const refreshSession = async () => {
         const storedToken = localStorage.getItem('token')
         if (!storedToken) {
@@ -35,6 +36,7 @@ export function AuthProvider({ children }) {
         refreshSession()
     }, [])
 
+    // ==== Login & Logout Functions ====
     const login = async (email, password, role_type) => {
         const { data } = await api.post('/auth/login', { email, password, role_type })
         localStorage.setItem('token', data.token)
@@ -49,11 +51,14 @@ export function AuthProvider({ children }) {
         setUser(null)
     }
 
+    // ==== Context Value ====
     const value = { user, token, loading, login, logout, refreshSession }
 
+    // ==== Render Provider ====
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
 
+// ==== Custom Hook for easy access ====
 export function useAuth() {
     const ctx = useContext(AuthContext)
     if (!ctx) throw new Error('useAuth must be used within AuthProvider')

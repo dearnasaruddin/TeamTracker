@@ -12,6 +12,7 @@ const LeaveApplyModal = ({ open, onClose, onSuccess }) => {
   tomorrow.setDate(today.getDate() + 1)
   const minDate = tomorrow.toISOString().split('T')[0]
 
+  // ======== Handle Form Submission ========
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)

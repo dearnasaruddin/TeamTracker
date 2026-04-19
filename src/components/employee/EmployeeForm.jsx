@@ -11,6 +11,7 @@ const EmployeeForm = ({ initialData, onSuccess, onCancel }) => {
     const [loading, setLoading] = useState(false)
     const isEditMode = !!initialData
 
+    // ======== Handle Form Submission for both Create and Edit =========
     const handleSubmit = async (e) => {
         e.preventDefault()
         setLoading(true)

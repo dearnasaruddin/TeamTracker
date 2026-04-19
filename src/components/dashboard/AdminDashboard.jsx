@@ -1,6 +1,8 @@
 import { UsersIcon, Building2Icon, CalendarIcon, FileTextIcon } from "lucide-react"
 
-const AdminDashboard = ({data}) => {
+const AdminDashboard = ({ data }) => {
+
+    // ======== Cards Data =========
     const stats = [
         {
             icon: UsersIcon,
@@ -28,8 +30,8 @@ const AdminDashboard = ({data}) => {
         },
     ]
 
-  return (
-    <div className="animate-fade-in">
+    return (
+        <div className="animate-fade-in">
             <div className="mb-8">
                 <h1 className="page-title">Dashboard</h1>
                 <p className="page-subtitle">
@@ -52,7 +54,7 @@ const AdminDashboard = ({data}) => {
             </div>
 
         </div>
-  )
+    )
 }
 
 export default AdminDashboard

@@ -8,10 +8,11 @@ const LeaveHistory = ({ leaves, isAdmin, onUpdate }) => {
 
     const [processing, setProcessing] = useState(null)
 
+    // ========= Handle Approve/Reject Leave (Admin) =========
     const handleStatusUpdate = async (id, status) => {
         setProcessing(id)
         try {
-            await api.patch(`/leave/${id}`, {status})
+            await api.patch(`/leave/${id}`, { status })
             onUpdate()
         } catch (err) {
             toast.error(err?.response?.data?.error || err?.message)
@@ -24,6 +25,7 @@ const LeaveHistory = ({ leaves, isAdmin, onUpdate }) => {
         <div className="card overflow-hidden">
             <div className="overflow-x-auto">
                 <table className="table-modern">
+                    {/* ========= Table Header ========= */}
                     <thead>
                         <tr>
                             {isAdmin && <th>Employee</th>}
@@ -38,6 +40,7 @@ const LeaveHistory = ({ leaves, isAdmin, onUpdate }) => {
                         {leaves.length > 0 ? (
                             leaves.map((leave) => {
                                 return (
+                                    // ========= Employee Name =========
                                     <tr key={leave._id || leave.id}>
                                         {isAdmin &&
                                             <td className="text-gray-900">
@@ -46,20 +49,25 @@ const LeaveHistory = ({ leaves, isAdmin, onUpdate }) => {
                                             </td>
                                         }
 
+                                        // ========= Leave Type =========
                                         <td>
                                             <span className="badge bg-gray-200 text-gray-600">{leave.type}</span>
                                         </td>
 
+                                        // ========= Leave Duration =========
                                         <td className="px-6 py-4 text-gray-600"><span className="whitespace-nowrap">{format(new Date(leave.startDate), "MMM dd")}</span> - <span className="whitespace-nowrap">{format(new Date(leave.endDate), "MMM dd, yyyy")}</span> </td>
 
+                                        // ========= Leave Reason =========
                                         <td className="max-w-xs truncate text-gray-500" title={leave.reason}>
                                             {leave.reason}
                                         </td>
 
+                                        // ========= Leave Status =========
                                         <td>
                                             <span className={`badge ${leave.status === 'APPROVED' ? 'badge-success' : leave.status === 'REJECTED' ? 'badge-danger' : 'badge-warning'}`}>{leave.status}</span>
                                         </td>
 
+                                        {/* ========= Action Buttons ========= */}
                                         {isAdmin &&
                                             <td>
                                                 {leave.status === 'PENDING' &&
@@ -94,6 +102,7 @@ const LeaveHistory = ({ leaves, isAdmin, onUpdate }) => {
                             })
 
                         ) : (
+                            // ========== Empty State =========
                             <tr>
                                 <td colSpan={isAdmin ? 6 : 4} className="text-center py-12 text-gray-400">No leave applications found</td>
                             </tr>

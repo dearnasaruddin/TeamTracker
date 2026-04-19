@@ -11,6 +11,7 @@ const DashboardPage = () => {
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
 
+  // ========= Fetch Dashboard Data =========
   useEffect(() => {
     api.get('/dashboard').then((res) => {
       setData(res.data)
@@ -19,6 +20,7 @@ const DashboardPage = () => {
       .finally(() => setLoading(false))
   }, [])
 
+  // ======== Render =========
   if (loading) return <Loading />
   if (!data) return <p className='text-center text-gray-500 py-12'>Failed to load dashboard</p>
 

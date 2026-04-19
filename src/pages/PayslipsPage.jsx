@@ -15,6 +15,7 @@ const PayslipsPage = () => {
   const { user } = useAuth()
   const isAdmin = user?.role === 'ADMIN'
 
+  // ====== Fetch Payslips =======
   const fetchPayslips = useCallback(async () => {
     try {
       const res = await api.get('/payslips')
@@ -31,23 +32,26 @@ const PayslipsPage = () => {
   }, [fetchPayslips])
 
   useEffect(() => {
-    if(isAdmin) api.get('/employee').then((res)=>setEmployees(res.data.filter((e)=>e.isDeleted))).catch(()=>{})
+    if (isAdmin) api.get('/employee').then((res) => setEmployees(res.data.filter((e) => e.isDeleted))).catch(() => { })
   }, [isAdmin])
 
   if (loading) return <Loading />
 
   return (
     <div className="animate-fade-in">
+      {/* ========= Page Header ========= */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
         <div>
           <h1 className="page-title">Payslips</h1>
           <p className="page-subtitle">{isAdmin ? 'Generate and manage employee payslips' : 'Your payslip history'}</p>
         </div>
 
+        {/* ========= Generate Payslip Form ========= */}
         {isAdmin && <PayslipGenerateForm employees={employees} onSuccess={fetchPayslips} />}
 
       </div>
 
+      {/* ========= Payslip List ========= */}
       <PayslipList payslips={payslips} isAdmin={isAdmin} />
 
     </div>

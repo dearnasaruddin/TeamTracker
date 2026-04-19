@@ -8,6 +8,7 @@ const PayslipGenerateForm = ({ employees, onSuccess }) => {
     const [isOpen, setIsOpen] = useState(false)
     const [loading, setLoading] = useState(false)
 
+    // ====== Payslip form opening Button ======
     if (!isOpen) return (
         <button onClick={() => setIsOpen(true)} className="btn-primary flex items-center gap-2">
             <Plus className="size-4" />
@@ -15,6 +16,7 @@ const PayslipGenerateForm = ({ employees, onSuccess }) => {
         </button>
     )
 
+    // ======= Handle form submit =======
     const handleSubmit = async (e) => {
         e.preventDefault()
         setLoading(true)
@@ -26,7 +28,7 @@ const PayslipGenerateForm = ({ employees, onSuccess }) => {
             onSuccess()
         } catch (err) {
             toast.error(err?.response?.data?.error || err?.message)
-        }finally{
+        } finally {
             setLoading(false)
         }
     }

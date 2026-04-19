@@ -10,11 +10,11 @@ import { toast } from "sonner";
 
 const LoginForm = ({ role, title, subtitle }) => {
 
+  // ========== States ==========
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    email: role === "admin" ? "admin@example.com" : "employee@example.com",
+    password: role === "admin" ? "admin123" : "employee123",
   });
-
   const [status, setStatus] = useState({
     loading: false,
     error: "",

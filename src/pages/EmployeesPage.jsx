@@ -1,14 +1,13 @@
 import api from "@/api/axios"
-import { dummyEmployeeData, DEPARTMENTS } from "@/assets/dummyData/dummyData"
+import { DEPARTMENTS } from "@/assets/dummyData/dummyData"
 import EmployeeCard from "@/components/employee/EmployeeCard"
 import EmployeeForm from "@/components/employee/EmployeeForm"
 import { Search, Plus, X } from "lucide-react"
-import { useEffect } from "react"
-import { useCallback } from "react"
-import { useState } from "react"
+import { useState, useEffect, useCallback } from "react"
 
 const EmployeesPage = () => {
 
+  // ========== State =========
   const [employees, setEmployees] = useState([])
   const [loading, setLoading] = useState(true)
   const [editEmployee, setEditEmployee] = useState(null)
@@ -18,6 +17,7 @@ const EmployeesPage = () => {
     department: 'all'
   })
 
+  // ======== Fetch Employees =========
   const fetchEmployees = useCallback(async () => {
     try {
       const url = query.department !== 'all' ? `/employee?department=${query.department}` : '/employee'
@@ -25,7 +25,7 @@ const EmployeesPage = () => {
       setEmployees(res.data)
     } catch (error) {
       console.log('Failed to fetch employees')
-    }finally{
+    } finally {
       setLoading(false)
     }
   }, [query.department])
@@ -34,8 +34,10 @@ const EmployeesPage = () => {
     fetchEmployees()
   }, [fetchEmployees])
 
+  // ======== Filter Employees based on search query =========
   const filtered = employees.filter((emp) => `${emp.firstName} ${emp.lastName} ${emp.position}`.toLocaleLowerCase().includes(query.search.toLocaleLowerCase()))
 
+  // ======== Handlers =========
   const handleInput = (e) => {
     setQuery({ ...query, [e.target.name]: e.target.value })
   }

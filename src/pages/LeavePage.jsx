@@ -16,6 +16,7 @@ const LeavePage = () => {
   const [isDeleted, setIsDeleted] = useState(false)
   const isAdmin = user?.role === 'ADMIN'
 
+  // ======== Fetch Leaves =========
   const fetchLeaves = useCallback(async () => {
     try {
       const res = await api.get('/leave')
@@ -34,6 +35,7 @@ const LeavePage = () => {
 
   if (loading) return <Loading />
 
+  // =========== Calculate Leave Stats =========
   const approvedLeaves = leaves.filter((l) => l.status === 'APPROVED')
   const sickCount = approvedLeaves.filter((l) => l.type === 'SICK').length
   const casualCount = approvedLeaves.filter((l) => l.type === 'CASUAL').length
@@ -47,17 +49,23 @@ const LeavePage = () => {
 
   return (
     <div className="animate-fade-in">
+
+      {/* ========= Page Header ========= */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
         <div>
           <h1 className="page-title">Leave Management</h1>
           <p className="page-subtitle">{isAdmin ? 'Manage leave applications' : 'Your leave history and requests'}</p>
         </div>
+
+        {/* ========= Apply for Leave Button ========= */}
         {!isAdmin && !isDeleted && (
           <button onClick={() => setShowModal(true)} className="btn-primary flex items-center gap-2 w-full sm:w-auto justify-center">
             <PlusIcon className="size-4" /> Apply for Leave
           </button>
         )}
       </div>
+
+      {/* ========= Leave Stats ========= */}
       {!isAdmin &&
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 mb-8">
           {leaveStats.map((s) => (
@@ -74,6 +82,8 @@ const LeavePage = () => {
           ))}
         </div>
       }
+
+      {/* ========= Leave History & Apply Modal ========= */}
       <LeaveHistory leaves={leaves} isAdmin={isAdmin} onUpdate={fetchLeaves} />
       <LeaveApplyModal open={showModal} onClose={() => setShowModal(false)} onSuccess={fetchLeaves} />
     </div>

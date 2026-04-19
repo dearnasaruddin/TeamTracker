@@ -15,14 +15,17 @@ function App() {
 
   return (
     <>
+      {/* ===== ShadCN Toaster ===== */}
       <Toaster position="top-center" richColors />
 
       <Routes>
         <Route path="/login" element={<LoginLandingPage />} />
 
-        <Route path="/login/admin" element={<LoginForm role='admin' title='Admin Portal' subtitle='Sing in to manage the organization'/>} />
-        <Route path="/login/employee" element={<LoginForm role='employee' title='Employee Portal' subtitle='Sing in to access your account'/>} />
+        {/* ===== Login Routes ===== */}
+        <Route path="/login/admin" element={<LoginForm role='admin' title='Admin Portal' subtitle='Sing in to manage the organization' />} />
+        <Route path="/login/employee" element={<LoginForm role='employee' title='Employee Portal' subtitle='Sing in to access your account' />} />
 
+        {/* ===== Main Routes ===== */}
         <Route element={<CommonLayout />} >
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/employees" element={<EmployeesPage />} />
@@ -34,6 +37,7 @@ function App() {
 
         <Route path="/print/payslip/:id" element={<PrintPayslipPage />} />
 
+        {/* ===== 404 Route Redirect ===== */}
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>
     </>
