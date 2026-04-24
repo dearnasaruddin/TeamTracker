@@ -49,20 +49,20 @@ const LeaveHistory = ({ leaves, isAdmin, onUpdate }) => {
                                             </td>
                                         }
 
-                                        // ========= Leave Type =========
+                                        {/* ========= Leave Type ========= */}
                                         <td>
                                             <span className="badge bg-gray-200 text-gray-600">{leave.type}</span>
                                         </td>
 
-                                        // ========= Leave Duration =========
+                                        {/* ========= Leave Duration ========= */}
                                         <td className="px-6 py-4 text-gray-600"><span className="whitespace-nowrap">{format(new Date(leave.startDate), "MMM dd")}</span> - <span className="whitespace-nowrap">{format(new Date(leave.endDate), "MMM dd, yyyy")}</span> </td>
 
-                                        // ========= Leave Reason =========
+                                        {/* ========= Leave Reason ========= */}
                                         <td className="max-w-xs truncate text-gray-500" title={leave.reason}>
                                             {leave.reason}
                                         </td>
 
-                                        // ========= Leave Status =========
+                                        {/* ========= Leave Status ========= */}
                                         <td>
                                             <span className={`badge ${leave.status === 'APPROVED' ? 'badge-success' : leave.status === 'REJECTED' ? 'badge-danger' : 'badge-warning'}`}>{leave.status}</span>
                                         </td>
